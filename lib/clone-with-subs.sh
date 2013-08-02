@@ -41,7 +41,7 @@ DEPS=( git-archive-all.sh )
 if [ -d $LIB ]; then
 #  echo "LIB dir exists: $LIB"
   for dependency in $DEPS; do
-    if [ ! -x "$LIB/$dependency" ]; then
+    if [ ! -x "$($(which readlink) -f $LIB/$dependency)" ]; then
       echo " Failed dependency $LIB/$dependency"
       exit $E_BADDEPS
     fi
