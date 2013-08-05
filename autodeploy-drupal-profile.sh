@@ -72,7 +72,9 @@ $APA2CTL restart
 # Update y revert de features
 COLUMNS=72 $DRUSH -r $DST_DIR -l $SITE_NAME cc all
 COLUMNS=72 $DRUSH -r $DST_DIR -l $SITE_NAME updatedb -y
-COLUMNS=72 $DRUSH -r $DST_DIR -l $SITE_NAME fra -y
+#COLUMNS=72 $DRUSH -r $DST_DIR -l $SITE_NAME fra -y
+COLUMNS=72 $DRUSH cache-clear drush
+COLUMNS=72 $DRUSH -r $DST_DIR -l $SITE_NAME features-revert-all -y
 
 # Borrar caches
 COLUMNS=72 $DRUSH -r $DST_DIR -l $SITE_NAME cc all
