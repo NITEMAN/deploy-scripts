@@ -65,6 +65,7 @@ echo -e "$($DATE '+%Y-%m-%d %H:%M %Z')\t$DEP_BRANCH\t$REPO_DATE\t$REPO_HASH\t$DE
 
 $RM -r $DST_DIR
 $MV $BUILD_DIR $DST_DIR
+$RM -r $TMP_DIR
 
 # Reload apache
 $APA2CTL restart
