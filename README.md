@@ -19,3 +19,4 @@ TODO
 ----
 
 * Add CONF_OVERWRITE support for non drupal scripts
+* Add registry_rebuild as submodule (https://drupal.org/project/registry_rebuild) (drush --include=pathamiregistryrebuid rr)
