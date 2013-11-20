@@ -18,5 +18,7 @@ or initialite submodules after clonning
 TODO
 ----
 
+* FIX APACHE2CTL
+* Add Varnish support
 * Add CONF_OVERWRITE support for non drupal scripts
 * Add registry_rebuild as submodule (https://drupal.org/project/registry_rebuild) (drush --include=pathamiregistryrebuid rr)
