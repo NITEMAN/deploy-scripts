@@ -66,7 +66,7 @@ for drup_site in $S_DIR/*; do
       if [ ! "${CONF_OVERWRITE}" = 'true' ] || [ ! -e "$T_DIR/$d_site/settings.php" ] ; then
         $CP -a $drup_site/settings.php $T_DIR/$d_site/ 
       else
-        if [ ! "${CONF_OVERWRITE}" = 'no_warn' ]; then
+        if [ ! "${CONF_OVERWRITE}" = 'true' ] && [ ! "${CONF_OVERWRITE}" = 'no_warn' ]; then
           echo "WARNING: $T_DIR/$d_site/settings.php already exists NOT overwritten"
         fi
       fi
