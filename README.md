@@ -15,4 +15,7 @@ or initialite submodules after clonning
     cd deploy-scripts
     git submodule update --init --recursive
 
+TODO
+----
 
+* Add CONF_OVERWRITE support for non drupal scripts

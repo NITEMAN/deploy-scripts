@@ -21,6 +21,8 @@ WEB_ROOT=$(git config hooks.deployRoot)
 : ${WEB_ROOT:="/var/www"}
 SUBDIR=$(git config hooks.deploySubdir)
 
+CONF_OVERWRITE=$(git config hooks.deployConfOverwrite)
+
 SITE_NAME=${DEP_NAME}
 LOG_FILE="${REAL_PATH}/log/${SITE_NAME}_autodeploy.log"
 
