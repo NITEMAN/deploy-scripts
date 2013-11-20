@@ -63,7 +63,7 @@ for drup_site in $S_DIR/*; do
         $CP -a $drup_site/private $T_DIR/$d_site
       fi
       # We only copy settings.php if it doesn't exists on target or if a flag is set
-      if [ "${CONF_OVERWRITE}" = 'true' ] || [ ! -e "$T_DIR/$d_site/settings.php" ] ; then
+      if [ ! "${CONF_OVERWRITE}" = 'true' ] || [ ! -e "$T_DIR/$d_site/settings.php" ] ; then
         $CP -a $drup_site/settings.php $T_DIR/$d_site/ 
       else
         if [ ! "${CONF_OVERWRITE}" = 'no_warn' ]; then
