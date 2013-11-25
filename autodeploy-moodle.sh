@@ -19,7 +19,7 @@ SED=$(which sed)
 GREP=$(which grep)
 CAT=$(which cat)
 DRUSH=$(which drush)
-APA2CTL=$(which apache2ctl)
+
 
 ### CONFIG
 DEP_NAME=$1

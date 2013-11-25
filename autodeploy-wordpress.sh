@@ -25,7 +25,7 @@ RM=$(which rm)
 DATE=$(which date)
 SED=$(which sed)
 CAT=$(which cat)
-APA2CTL=$(which apache2ctl)
+
 
 ### CONFIG
 DEP_NAME=$1

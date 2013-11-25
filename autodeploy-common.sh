@@ -23,6 +23,10 @@ SUBDIR=$(git config hooks.deploySubdir)
 
 CONF_OVERWRITE=$(git config hooks.deployConfOverwrite)
 
+APA2CTL=$(which apache2ctl)
+: ${APA2CTL:='/usr/sbin/apache2ctl'}
+
+
 SITE_NAME=${DEP_NAME}
 LOG_FILE="${REAL_PATH}/log/${SITE_NAME}_autodeploy.log"
 
