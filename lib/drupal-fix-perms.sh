@@ -47,19 +47,19 @@ A_SET="$DIR/sites/*/settings.php"
 
 echo "*** Fixing permissions ***"
 # General
-$FIND $DIR -wholename "$F_DIR" -prune -or -wholename "$P_DIR" -prune -or \( ! -user $OWNER -or ! -group $WWW_GR \) -exec $CHOWN $OWNER:$WWW_GR {} \;
-$FIND $DIR -wholename "$F_DIR" -prune -or -wholename "$P_DIR" -prune -or \( -type d -and ! -perm u=rwx,g=rxs,o= \) -exec $CHMOD u=rwx,g=rxs,o= {} \;
-$FIND $DIR -wholename "$F_DIR" -prune -or -wholename "$P_DIR" -prune -or \( -type f -and ! -perm u=rw,g=r,o= \) -exec $CHMOD u=rw,g=r,o= {} \;
+$FIND -H $DIR -wholename "$F_DIR" -prune -or -wholename "$P_DIR" -prune -or \( ! -user $OWNER -or ! -group $WWW_GR \) -exec $CHOWN $OWNER:$WWW_GR {} \;
+$FIND -H $DIR -wholename "$F_DIR" -prune -or -wholename "$P_DIR" -prune -or \( -type d -and ! -perm u=rwx,g=rxs,o= \) -exec $CHMOD u=rwx,g=rxs,o= {} \;
+$FIND -H $DIR -wholename "$F_DIR" -prune -or -wholename "$P_DIR" -prune -or \( -type f -and ! -perm u=rw,g=r,o= \) -exec $CHMOD u=rw,g=r,o= {} \;
 # files directory
-$FIND $F_DIR \( ! -user $WWW_US -or ! -group $WWW_GR \) -exec $CHOWN $WWW_US:$WWW_GR {} \;
+$FIND -H $F_DIR \( ! -user $WWW_US -or ! -group $WWW_GR \) -exec $CHOWN $WWW_US:$WWW_GR {} \;
 $CHMOD 2770 $F_DIR
-$FIND $F_DIR \( -type d -and ! -perm u=rwx,g=rwxs,o= \) -exec $CHMOD u=rwx,g=rwxs,o= {} \;
-$FIND $F_DIR \( -type f -and ! -perm u=rw,g=rw,o= \) -exec $CHMOD u=rw,g=rw,o= {} \;
+$FIND -H $F_DIR \( -type d -and ! -perm u=rwx,g=rwxs,o= \) -exec $CHMOD u=rwx,g=rwxs,o= {} \;
+$FIND -H $F_DIR \( -type f -and ! -perm u=rw,g=rw,o= \) -exec $CHMOD u=rw,g=rw,o= {} \;
 # private directory
-$FIND $P_DIR \( ! -user $WWW_US -or ! -group $WWW_GR \) -exec $CHOWN $WWW_US:$WWW_GR {} \;
+$FIND -H $P_DIR \( ! -user $WWW_US -or ! -group $WWW_GR \) -exec $CHOWN $WWW_US:$WWW_GR {} \;
 $CHMOD 2770 $P_DIR
-$FIND $P_DIR \( -type d -and ! -perm u=rwx,g=rwxs,o= \) -exec $CHMOD u=rwx,g=rwxs,o= {} \;
-$FIND $P_DIR \( -type f -and ! -perm u=rw,g=rw,o= \) -exec $CHMOD u=rw,g=rw,o= {} \;
+$FIND -H $P_DIR \( -type d -and ! -perm u=rwx,g=rwxs,o= \) -exec $CHMOD u=rwx,g=rwxs,o= {} \;
+$FIND -H $P_DIR \( -type f -and ! -perm u=rw,g=rw,o= \) -exec $CHMOD u=rw,g=rw,o= {} \;
 
 # setings.php
 $CHMOD 440 $A_SET

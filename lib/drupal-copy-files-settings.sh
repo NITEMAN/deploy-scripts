@@ -26,6 +26,8 @@ AWK=$(which awk)
 MKDIR=$(which mkdir)
 RM=$(which rm)
 CP=$(which cp)
+LN=$(which ln)
+READLINK=$(which readlink)
 
 SOURCE=$1
 TARGET=$2
@@ -55,12 +57,20 @@ for drup_site in $S_DIR/*; do
       # If there are files directory on source we replace target's with a copy of it
       if [ -d "$drup_site/files" ]; then 
         $RM -fr $T_DIR/$d_site/files
-        $CP -a $drup_site/files $T_DIR/$d_site
+        if [ -L "$drup_site/files" ]; then
+          $LN -s $($READLINK -f "$drup_site/files") $T_DIR/$d_site
+        else
+          $CP -a $drup_site/files $T_DIR/$d_site
+        fi
       fi
       # If there are private directory on source we replace target's with a copy of it
       if [ -d "$drup_site/private" ]; then 
         $RM -fr $T_DIR/$d_site/private
-        $CP -a $drup_site/private $T_DIR/$d_site
+        if [ -L "$drup_site/private" ]; then
+          $LN -s $($READLINK -f "$drup_site/private") $T_DIR/$d_site
+        else
+          $CP -a $drup_site/private $T_DIR/$d_site
+        fi
       fi
       # We only copy settings.php if it doesn't exists on target or if a flag is set
       if [ ! "${CONF_OVERWRITE}" = 'true' ] || [ ! -e "$T_DIR/$d_site/settings.php" ] ; then
