@@ -63,7 +63,8 @@ $RM -r $DST_DIR
 $MV $TMP_DIR $DST_DIR
 
 # Reload apache
-$APA2CTL graceful
+restartServerIfNecesary
+
 # Borrar caches
 pushd $(pwd)
 cd $DST_DIR

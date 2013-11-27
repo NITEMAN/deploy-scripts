@@ -68,7 +68,7 @@ $MV $BUILD_DIR $DST_DIR
 $RM -r $TMP_DIR
 
 # Reload apache
-$APA2CTL restart
+restartServerIfNecesary
 
 # Update y revert de features
 COLUMNS=72 $DRUSH -r $DST_DIR -l $SITE_NAME cc all

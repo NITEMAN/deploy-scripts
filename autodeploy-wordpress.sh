@@ -62,7 +62,8 @@ $RM -r $DST_DIR
 $MV $TMP_DIR $DST_DIR
 
 # Reload apache
-$APA2CTL graceful
+restartServerIfNecesary
+
 # Borrar caches
 #TODO: Add support for wp cli
 #TODO: Add varnish clear support via autodeploy-common

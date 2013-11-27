@@ -65,7 +65,8 @@ $RM -r $DST_DIR
 $MV $TMP_DIR $DST_DIR
 
 # Reload apache
-$APA2CTL restart
+restartServerIfNecesary
+
 # Borrar caches
 pushd $(pwd) && cd $DST_DIR && sudo -u $WWW_US /usr/bin/php admin/cli/purge_caches.php && popd
 #varnishadm -T :6082 -S /etc/varnish/secret "ban req.http.host ~ '${SITE_NAME}' && req.url ~ '^/'"
