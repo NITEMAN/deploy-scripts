@@ -63,7 +63,8 @@ restartServerIfNecesary
 
 # Borrar caches
 COLUMNS=72 $DRUSH -r $DST_DIR -l $SITE_NAME cc all
-#TODO: Add varnish clear support via autodeploy-common
+
+# Clean Varnish
 cleanVarnishIfNecesary
 
 exit 0

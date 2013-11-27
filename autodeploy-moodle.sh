@@ -69,6 +69,8 @@ restartServerIfNecesary
 
 # Borrar caches
 pushd $(pwd) && cd $DST_DIR && sudo -u $WWW_US /usr/bin/php admin/cli/purge_caches.php && popd
-#varnishadm -T :6082 -S /etc/varnish/secret "ban req.http.host ~ '${SITE_NAME}' && req.url ~ '^/'"
+
+# Clean Varnish
+cleanVarnishIfNecesary
 
 exit 0

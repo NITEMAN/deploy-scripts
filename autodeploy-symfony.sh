@@ -71,7 +71,8 @@ cd $DST_DIR
 php symfony cc
 php symfony doctrine:migrate
 popd
-#TODO: Add varnish clear support via autodeploy-common
-#varnishadm -T :6082 -S /etc/varnish/secret "ban req.http.host ~ '${SITE_NAME}' && req.url ~ '^/'"
+
+# Clean Varnish
+cleanVarnishIfNecesary
 
 exit 0
