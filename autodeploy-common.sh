@@ -28,6 +28,11 @@ RELOAD_SERVER=$(git config hooks.deployReloadServer)
 RELOAD_CMD=$(git config hooks.deployReloadCMD)
 : ${RELOAD_CMD:='/usr/sbin/apache2ctl graceful'}
 
+CLEAN_VARNISH=$(git config hooks.deployCleanVarnish)
+: ${CLEAN_VARNISH:='false'}
+
+VARNISH_ADM_OPTS=$(git config hooks.deployVarnishiAdmOpts)
+: ${VARNISH_ADM_OPTS:='-T :6082 -S /etc/varnish/secret'}
 
 SITE_NAME=${DEP_NAME}
 LOG_FILE="${REAL_PATH}/log/${SITE_NAME}_autodeploy.log"
@@ -44,4 +49,12 @@ restartServerIfNecesary() {
   return 0
 }
 
+cleanVarnishIfNecesary() {
+  if [ "${CLEAN_VARNISH}" = 'true' ]; then
+    VARNISH_CMD="varnishadm ${VARNISH_ADM_OPTS} \"ban req.http.host ~ \"${SITE_NAME}\" && req.url ~ \"^/\"\""
+    echo "${ECHO_PREFIX} Cleaning Varnish server with command: ${VARNISH_CMD}"
+    eval ${VARNISH_CMD}
+  fi
+  return 0
+}
 

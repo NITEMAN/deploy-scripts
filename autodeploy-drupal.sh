@@ -64,6 +64,6 @@ restartServerIfNecesary
 # Borrar caches
 COLUMNS=72 $DRUSH -r $DST_DIR -l $SITE_NAME cc all
 #TODO: Add varnish clear support via autodeploy-common
-#varnishadm -T :6082 -S /etc/varnish/secret "ban req.http.host ~ '${SITE_NAME}' && req.url ~ '^/'"
+cleanVarnishIfNecesary
 
 exit 0
