@@ -39,7 +39,7 @@ TMP_DIR="/tmp/deploy_${SITE_NAME}.tmp$$"
 restartServerIfNecesary() {
   if [ "${RELOAD_SERVER}" = 'true' ]; then
     echo "${ECHO_PREFIX} Restarting server with command: ${RELOAD_CMD}"
-    ${RELOAD_CMD}
+    eval ${RELOAD_CMD}
   fi
   return 0
 }
