@@ -23,8 +23,10 @@ SUBDIR=$(git config hooks.deploySubdir)
 
 CONF_OVERWRITE=$(git config hooks.deployConfOverwrite)
 
-APA2CTL=$(which apache2ctl)
-: ${APA2CTL:='/usr/sbin/apache2ctl'}
+RELOAD_SERVER=$(git config hooks.deployReloadServer)
+: ${RELOAD_SERVER:='false'}
+RELOAD_CMD=$(git config hooks.deployReloadCMD)
+: ${RELOAD_CMD:='/usr/sbin/apache2ctl graceful'}
 
 
 SITE_NAME=${DEP_NAME}
@@ -33,3 +35,13 @@ LOG_FILE="${REAL_PATH}/log/${SITE_NAME}_autodeploy.log"
 DST_DIR="${WEB_ROOT}/${SITE_NAME}/${SUBDIR}"
 DST_DIR=${DST_DIR%/}
 TMP_DIR="/tmp/deploy_${SITE_NAME}.tmp$$"
+
+restartServerIfNecesary() {
+  if [ "${RELOAD_SERVER}" = 'true']; then
+    echo "${ECHO_PREFIX} Restarting server with command: ${RELOAD_CMD}"
+    ${RELOAD_CMD}
+  fi
+  return 0
+}
+
+
