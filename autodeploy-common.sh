@@ -37,7 +37,7 @@ DST_DIR=${DST_DIR%/}
 TMP_DIR="/tmp/deploy_${SITE_NAME}.tmp$$"
 
 restartServerIfNecesary() {
-  if [ "${RELOAD_SERVER}" = 'true']; then
+  if [ "${RELOAD_SERVER}" = 'true' ]; then
     echo "${ECHO_PREFIX} Restarting server with command: ${RELOAD_CMD}"
     ${RELOAD_CMD}
   fi
