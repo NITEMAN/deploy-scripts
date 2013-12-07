@@ -6,7 +6,7 @@
 # Arguments: $TARGET
 # Local dependencies: - none -
 # Remote dependencies: - none -
-# Short description: A script to fix file permissions on a TARGET Drupal installations
+# Short description: A script to fix file permissions on a TARGET Wordpress installations
 
 E_BADARGS=65
 E_BADDEPS=66

@@ -6,7 +6,7 @@
 # Arguments: $SOURCE $TARGET
 # Local dependencies: - none -
 # Remote dependencies: - none -
-# Short description: A script to copy files (and non existant settings.php) from $SOURCE to TARGET Drupal installations
+# Short description: A script to copy files (and non existant settings.php) from $SOURCE to TARGET Moodle installations
 
 E_BADARGS=65
 E_BADDEPS=66
