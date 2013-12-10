@@ -39,10 +39,9 @@ fi
 : ${WWW_US:="www-data"}
 : ${WWW_GR:="www-data"}
 
-
 DIR=$TARGET
-WWW_WRITE_PERMS=(config tools/smarty/cache tools/smarty/compile tools/smarty_v2/cache tools/smarty_v2/compile sitemap.xml log)
-WWW_WRITE_PERMS_RECURSIVELY=(img mails modules themes/prestashop/lang themes/prestashop/cache translations upload download)
+WWW_WRITE_PERMS=(config tools/smarty/_cache tools/smarty/_compile tools/smarty_v2/cache tools/smarty_v2/compile sitemap.xml log)
+WWW_WRITE_PERMS_RECURSIVELY=(mails modules themes/prestashop/lang themes/prestashop/cache translations upload download)
 A_SET="$DIR/config/settings.inc.php"
 
 echo "*** Fixing permissions ***"
@@ -55,30 +54,30 @@ for F_DIR in "${WWW_WRITE_ALL[@]}"
   done
 FIND_NO_F_DIRS=${FIND_NO_F_DIRS:0:-4}
 
-$FIND_NO_F_DIRS -or  \( ! -user root -or ! -group $WWW_GR \) -exec $CHOWN root:$WWW_GR {} \;
-$FIND_NO_F_DIRS -or \( -type d -and ! -perm u=rwx,g=rxs,o= \) -exec $CHMOD u=rwx,g=rxs,o= {} \;
-$FIND_NO_F_DIRS -or \( -type f -and ! -perm u=rw,g=r,o= \) -exec $CHMOD u=rw,g=r,o= {} \;
+eval "$FIND_NO_F_DIRS -or  \( ! -user root -or ! -group $WWW_GR \) -exec $CHOWN root:$WWW_GR {} \;"
+eval "$FIND_NO_F_DIRS -or \( -type d -and ! -perm u=rwx,g=rxs,o= \) -exec $CHMOD u=rwx,g=rxs,o= {} \;"
+eval "$FIND_NO_F_DIRS -or \( -type f -and ! -perm u=rw,g=r,o= \) -exec $CHMOD u=rw,g=r,o= {} \;"
 
 # Write permissions
 for F_DIR in "${WWW_WRITE_PERMS[@]}"
 do
-  $CHOWN $WWW_US:$WWW_GR $F_DIR
-  if [-d F_DIR]
+  $CHOWN $WWW_US:$WWW_GR $DIR/$F_DIR
+  if [ -d $F_DIR ]
   then
-    $CHMOD 2755 $F_DIR
+    $CHMOD 2755 $DIR/$F_DIR
   else
-    $CHMOD 644 $F_DIR
+    $CHMOD 644 $DIR/$F_DIR
   fi
 done
 
 # Write permissions recursively
-for F_DIR in "${WWW_WRITE_PERMS[@]}"
+for F_DIR in "${WWW_WRITE_PERMS_RECURSIVELY[@]}"
 do
-  $CHOWN -R $WWW_US:$WWW_GR $F_DIR
-  $CHMOD 2755 $F_DIR
-  $FIND $F_DIR \( ! -user $WWW_US -or ! -group $WWW_GR \) -exec $CHOWN $WWW_US:$WWW_GR {} \;
-  $FIND $F_DIR \( -type d -and ! \( -perm u=rwx,g=rx,o=rx -or -perm u=rwx,g=rxs,o=rx \) \) -exec $CHMOD u=rwx,g=rx,o=rx {} \;
-  $FIND $F_DIR \( -type f -and ! -perm u=rw,g=r,o=r \) -exec $CHMOD u=rw,g=r,o=r {} \;
+  $CHOWN -R $WWW_US:$WWW_GR $DIR/$F_DIR
+  $CHMOD 2755 $DIR/$F_DIR
+  $FIND $DIR/$F_DIR \( ! -user $WWW_US -or ! -group $WWW_GR \) -exec $CHOWN $WWW_US:$WWW_GR {} \;
+  $FIND $DIR/$F_DIR \( -type d -and ! \( -perm u=rwx,g=rx,o=rx -or -perm u=rwx,g=rxs,o=rx \) \) -exec $CHMOD u=rwx,g=rx,o=rx {} \;
+  $FIND $DIR/$F_DIR \( -type f -and ! -perm u=rw,g=r,o=r \) -exec $CHMOD u=rw,g=r,o=r {} \;
 done
 
 # setings.inc.php
