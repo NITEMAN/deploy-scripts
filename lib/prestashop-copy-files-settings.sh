@@ -15,7 +15,7 @@ E_TARGET_DONT_EXISTS=68
 
 EXPECTED_ARGS=2
 
-echo $0
+#echo $0
 if [ $# -ne $EXPECTED_ARGS ]
 then
   echo " This script expect $EXPECTED_ARGS arguments instead of $#"
