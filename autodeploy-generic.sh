@@ -9,6 +9,7 @@
 # Short description: A script to deploy a working copy of $BRANCH from $REPO of $SITE logging $GL_USER
 # ${SCRIPT_DIR}/sudo/autodeploy-generic.sh ${DEPLOY_NAME} ${BRANCH_NAME} ${GL_USER}
 
+#set -x
 
 E_BADARGS=65
 
@@ -41,7 +42,7 @@ DEP_USER=$3
 
 # Copiar files y settings
 # copy-files-settings.sh $SOURCE $TARGET
-. $LIB/generic-copy-files-settings.sh $DST_DIR $TMP_DIR
+#. $LIB/generic-copy-files-settings.sh $DST_DIR $TMP_DIR
 
 # Arreglar permisos
 # fix-drupal-perms.sh $TARGET
