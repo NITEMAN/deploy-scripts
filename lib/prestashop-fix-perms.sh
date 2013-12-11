@@ -40,7 +40,7 @@ fi
 : ${WWW_GR:="www-data"}
 
 DIR=$TARGET
-WWW_WRITE_PERMS=(config tools/smarty/_cache tools/smarty/_compile tools/smarty_v2/cache tools/smarty_v2/compile sitemap.xml log)
+WWW_WRITE_PERMS=(config tools/smarty/_cache tools/smarty/compile tools/smarty/cache tools/smarty_v2/cache tools/smarty_v2/compile sitemap.xml log)
 WWW_WRITE_PERMS_RECURSIVELY=(mails modules themes/prestashop/lang themes/prestashop/cache translations upload download)
 A_SET="$DIR/config/settings.inc.php"
 
@@ -49,9 +49,9 @@ echo "*** Fixing permissions ***"
 WWW_WRITE_ALL=("${WWW_WRITE_PERMS[@]}" "${WWW_WRITE_PERMS_RECURSIVELY[@]}")
 FIND_NO_F_DIRS="$FIND -H $DIR"
 for F_DIR in "${WWW_WRITE_ALL[@]}"
-  do
-    FIND_NO_F_DIRS="$FIND_NO_F_DIRS -wholename \"$F_DIR\" -prune -or"
-  done
+do
+  FIND_NO_F_DIRS="$FIND_NO_F_DIRS -wholename \"$F_DIR\" -prune -or"
+done
 FIND_NO_F_DIRS=${FIND_NO_F_DIRS:0:-4}
 
 eval "$FIND_NO_F_DIRS -or  \( ! -user root -or ! -group $WWW_GR \) -exec $CHOWN root:$WWW_GR {} \;"
@@ -62,7 +62,7 @@ eval "$FIND_NO_F_DIRS -or \( -type f -and ! -perm u=rw,g=r,o= \) -exec $CHMOD u=
 for F_DIR in "${WWW_WRITE_PERMS[@]}"
 do
   $CHOWN $WWW_US:$WWW_GR $DIR/$F_DIR
-  if [ -d $F_DIR ]
+  if [ -d $DIR/$F_DIR ]
   then
     $CHMOD 2755 $DIR/$F_DIR
   else
