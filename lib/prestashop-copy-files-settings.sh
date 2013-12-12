@@ -40,7 +40,7 @@ if [ ! -d $TARGET ]; then
   exit $E_TARGET_DONT_EXISTS
 fi
 
-DIRS=(tools/smarty/cache tools/smarty/compile tools/smarty_v2/cache tools/smarty_v2/compile)
+DIRS=(img tools/smarty/cache tools/smarty/compile tools/smarty_v2/cache tools/smarty_v2/compile)
 for DIR in "${DIRS[@]}"
 do
   if [ ! -d $TARGET/$DIR ]

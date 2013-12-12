@@ -40,8 +40,8 @@ fi
 : ${WWW_GR:="www-data"}
 
 DIR=$TARGET
-WWW_WRITE_PERMS=(config tools/smarty/_cache tools/smarty/compile tools/smarty/cache tools/smarty_v2/cache tools/smarty_v2/compile sitemap.xml log)
-WWW_WRITE_PERMS_RECURSIVELY=(mails modules themes/prestashop/lang themes/prestashop/cache translations upload download)
+WWW_WRITE_PERMS=(config tools/smarty/cache tools/smarty/compile tools/smarty/cache tools/smarty_v2/cache tools/smarty_v2/compile sitemap.xml log)
+WWW_WRITE_PERMS_RECURSIVELY=(img mails modules themes/prestashop/lang themes/prestashop/cache translations upload download)
 A_SET="$DIR/config/settings.inc.php"
 
 echo "*** Fixing permissions ***"
