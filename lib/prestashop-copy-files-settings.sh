@@ -6,7 +6,7 @@
 # Arguments: $SOURCE $TARGET
 # Local dependencies: - none -
 # Remote dependencies: - none -
-# Short description: A script to copy files (and non existant settings.php) from $SOURCE to TARGET Prestashop installations
+# Short description: A script to copy files from $SOURCE to TARGET Prestashop installations. Also creates some needed dirs.
 
 E_BADARGS=65
 E_BADDEPS=66
@@ -39,4 +39,13 @@ if [ ! -d $TARGET ]; then
   echo " ABORTED: Target $TARGET doesn't exists"
   exit $E_TARGET_DONT_EXISTS
 fi
+
+DIRS=(tools/smarty/cache tools/smarty/compile tools/smarty_v2/cache tools/smarty_v2/compile)
+for DIR in "${DIRS[@]}"
+do
+  if [ ! -d $TARGET/$DIR ]
+  then
+    $MKDIR $TARGET/$DIR
+  fi
+done
 
