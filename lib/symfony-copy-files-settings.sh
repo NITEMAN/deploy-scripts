@@ -77,5 +77,3 @@ else
   mkdir -p ${TARGET}/web/uploads
 fi
 
-exit 0
-

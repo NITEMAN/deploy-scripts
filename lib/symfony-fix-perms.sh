@@ -89,5 +89,3 @@ fi
 $CHMOD 440 $A_SET
 $CHMOD 440 $A_SET_2
 
-exit 0
-
