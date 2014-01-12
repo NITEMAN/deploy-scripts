@@ -53,13 +53,13 @@ echo "*** Fixing permissions ***"
 # Generales
 #echo "find $DIR \( ! -user root -or ! -group $WWW_GR \)"
 #$FIND $DIR -wholename "$F_DIR" -prune -or  \( ! -user root -or ! -group $WWW_GR \) -print
-$FIND_NO_F_DIRS -or  \( ! -user root -or ! -group $WWW_GR \) -exec $CHOWN root:$WWW_GR {} \;
+eval "$FIND_NO_F_DIRS -or  \( ! -user root -or ! -group $WWW_GR \) -exec $CHOWN root:$WWW_GR {} \;"
 #echo "find $DIR \( -type d -and ! -perm u=rwx,g=rxs,o= \)"
 #$FIND $DIR -wholename "$F_DIR" -prune -or \( -type d -and ! -perm u=rwx,g=rxs,o= \)
-$FIND_NO_F_DIRS -or \( -type d -and ! -perm u=rwx,g=rxs,o= \) -exec $CHMOD u=rwx,g=rxs,o= {} \;
+eval "$FIND_NO_F_DIRS -or \( -type d -and ! -perm u=rwx,g=rxs,o= \) -exec $CHMOD u=rwx,g=rxs,o= {} \;"
 #echo "find $DIR \( -type f -and ! -perm u=rw,g=r,o= \)"
 #$FIND $DIR -wholename "$F_DIR" -prune -or \( -type f -and ! -perm u=rw,g=r,o= \)
-$FIND_NO_F_DIRS -or \( -type f -and ! -perm u=rw,g=r,o= \) -exec $CHMOD u=rw,g=r,o= {} \;
+eval "$FIND_NO_F_DIRS -or \( -type f -and ! -perm u=rw,g=r,o= \) -exec $CHMOD u=rw,g=r,o= {} \;"
 
 # Permisos Files
 if [ -d $F_DIR_1 ]; then
