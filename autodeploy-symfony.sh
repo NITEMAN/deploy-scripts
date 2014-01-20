@@ -72,9 +72,8 @@ if [ -e symfony ]; then
   php symfony cc
   php symfony doctrine:migrate
 elif [ -e app/console ]; then
-  cd app
-  php console cc
-  php console doctrine:migrate
+  php app/console cc
+  php app/console doctrine:migrate
 fi
 popd
 
