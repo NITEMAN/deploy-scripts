@@ -86,6 +86,10 @@ if [ -d $F_DIR_3 ]; then
 fi
 
 #Permisos Setings 440
-$CHMOD 440 $A_SET
-$CHMOD 440 $A_SET_2
+if [ -e $A_SET ]; then
+  $CHMOD 440 $A_SET
+fi
+if [ -e $A_SET_2 ]; then
+  $CHMOD 440 $A_SET_2
+fi
 
