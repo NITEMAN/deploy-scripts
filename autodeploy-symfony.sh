@@ -68,8 +68,14 @@ restartServerIfNecesary
 # Borrar caches
 pushd $(pwd)
 cd $DST_DIR
-php symfony cc
-php symfony doctrine:migrate
+if [ -e symfony ]; then
+  php symfony cc
+  php symfony doctrine:migrate
+elif [ -e app/console ]; then
+  cd app
+  php console cc
+  php console doctrine:migrate
+fi
 popd
 
 # Clean Varnish
