@@ -89,7 +89,7 @@ if [ -e symfony ]; then
   php symfony doctrine:migrate
 elif [ -e app/console ]; then
   php app/console cache:clear --env=prod
-  php app/console doctrine:migrate
+  #php app/console doctrine:migrate
 fi
 popd
 
