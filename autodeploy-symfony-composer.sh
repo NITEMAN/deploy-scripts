@@ -61,6 +61,8 @@ ${COMPOSER} update
 php app/console assets:install web
 php app/console statics:generator --env=prod
 
+cd $C_DIR
+
 # Firmar Robots
 REPO_HASH=$($CAT $TMP_DIR/.git_hash)
 REPO_DATE=$($CAT $TMP_DIR/.git_date)
