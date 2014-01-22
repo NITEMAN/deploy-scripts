@@ -25,7 +25,6 @@ RM=$(which rm)
 DATE=$(which date)
 SED=$(which sed)
 CAT=$(which cat)
-DRUSH=$(which drush)
 
 COMPOSER=$(which composer)
 
@@ -40,6 +39,14 @@ DEP_USER=$3
 # clone-with-subs.sh $REPO $BRANCH $TARGET
 . $LIB/clone-with-subs.sh $REPO_BARE $DEP_BRANCH $TMP_DIR
 
+# Copiar files y settings
+# copy-files-settings.sh $SOURCE $TARGET
+. $LIB/symfony-copy-files-settings.sh $DST_DIR $TMP_DIR
+
+# Arreglar permisos
+# fix-drupal-perms.sh $TARGET
+. $LIB/symfony-fix-perms.sh $TMP_DIR
+
 C_DIR=$(pwd)
 cd $TMP_DIR
 # ensure composer is installed
@@ -49,14 +56,6 @@ if [ "${COMPOSER}" = "" ]; then
 fi
 ${COMPOSER} self-update
 ${COMPOSER} update
-
-# Copiar files y settings
-# copy-files-settings.sh $SOURCE $TARGET
-. $LIB/symfony-copy-files-settings.sh $DST_DIR $TMP_DIR
-
-# Arreglar permisos
-# fix-drupal-perms.sh $TARGET
-. $LIB/symfony-fix-perms.sh $TMP_DIR
 
 php app/console assets:install web
 php app/console statics:generator --env=prod

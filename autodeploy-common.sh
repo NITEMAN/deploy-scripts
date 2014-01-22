@@ -23,6 +23,8 @@ SUBDIR=$(git config hooks.deploySubdir)
 
 CONF_OVERWRITE=$(git config hooks.deployConfOverwrite)
 
+FRAMEWORK_VERSION=$(git config hooks.deployFrameworkVersion)
+
 RELOAD_SERVER=$(git config hooks.deployReloadServer)
 : ${RELOAD_SERVER:='false'}
 RELOAD_CMD=$(git config hooks.deployReloadCMD)

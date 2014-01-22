@@ -11,6 +11,7 @@
 E_BADARGS=65
 E_BADDEPS=66
 E_TARGET_DONT_EXISTS=68
+E_UNSUPPORTED_FW_VERSION=69
 
 EXPECTED_ARGS=1
 
@@ -28,7 +29,10 @@ SED=$(which sed)
 
 #TARGET=$1
 TARGET=$(echo $1 | $SED -e "s/\/*$//")
+: ${FRAMEWORK_VERSION:="1"}
 echo "*** Fixing file permissions for $TARGET"
+
+echo "*** Framework version: ${FRAMEWORK_VERSION} ***"
 
 if [ ! -d $TARGET ]; then
   echo " ABORTED: Target $TARGET doesn't exists"
@@ -41,11 +45,28 @@ fi
 
 
 DIR=$TARGET
-F_DIR_1="$DIR/web/uploads"
-F_DIR_2="$DIR/cache"
-F_DIR_3="$DIR/log"
-A_SET="$DIR/config/databases.yml"
-A_SET_2="$DIR/config/ProjectConfiguration.class.php"
+case ${FRAMEWORK_VERSION} in
+  1 )
+    F_DIR_1="$DIR/web/uploads"
+    F_DIR_2="$DIR/cache"
+    F_DIR_3="$DIR/log"
+    A_SET="$DIR/config/databases.yml"
+    A_SET_2="$DIR/config/ProjectConfiguration.class.php"
+    A_SET_3="$DIR/config/parameters.yml"
+    ;;
+  2 )
+    F_DIR_1="$DIR/web/uploads"
+    F_DIR_2="$DIR/app/cache"
+    F_DIR_3="$DIR/app/log"
+    A_SET="$DIR/app/config/databases.yml"
+    A_SET_2="$DIR/app/config/ProjectConfiguration.class.php"
+    A_SET_3="$DIR/app/config/parameters.yml"
+    ;;
+  * )
+    echo "!!! ERROR: unsupported Framework version '${FRAMEWORK_VERSION}'"
+    exit $E_UNSUPPORTED_FW_VERSION
+    ;;
+esac
 
 FIND_NO_F_DIRS="$FIND $DIR -wholename '$F_DIR_1' -prune -or -wholename '$F_DIR_2' -prune -or -wholename '$F_DIR_3' -prune"
 
@@ -91,5 +112,8 @@ if [ -e $A_SET ]; then
 fi
 if [ -e $A_SET_2 ]; then
   $CHMOD 440 $A_SET_2
+fi
+if [ -e $A_SET_3 ]; then
+  $CHMOD 440 $A_SET_3
 fi
 
