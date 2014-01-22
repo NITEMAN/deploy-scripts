@@ -92,18 +92,14 @@ fi
 if [ -d $F_DIR_2 ]; then
   $CHMOD 2770 $F_DIR_2
   $FIND $F_DIR_2 \( ! -user $WWW_US -or ! -group $WWW_GR \) -exec $CHOWN $WWW_US:$WWW_GR {} \;
-  #looking for a quicker command
-  #$FIND $F_DIR_2 \( -type d -and ! -perm u=rwx,g=rx,o=rx \) -exec $CHMOD u=rwx,g=rx,o=rx {} \;
-  $FIND $F_DIR_2 \( -type d -and ! \( -perm u=rwx,g=rx,o=rx -or -perm u=rwx,g=rxs,o=rx \) \) -exec $CHMOD u=rwx,g=rx,o=rx {} \;
-  $FIND $F_DIR_2 \( -type f -and ! -perm u=rw,g=r,o=r \) -exec $CHMOD u=rw,g=r,o=r {} \;
+  $FIND $F_DIR_2 \( -type d -and ! -perm u=rwx,g=rwxs,o= \) -exec $CHMOD u=rwx,g=rwxs,o= {} \;
+  $FIND $F_DIR_2 \( -type f -and ! -perm u=rw,g=rw,o= \) -exec $CHMOD u=rw,g=rw,o= {} \;
 fi
 if [ -d $F_DIR_3 ]; then
   $CHMOD 2770 $F_DIR_3
   $FIND $F_DIR_3 \( ! -user $WWW_US -or ! -group $WWW_GR \) -exec $CHOWN $WWW_US:$WWW_GR {} \;
-  #looking for a quicker command
-  #$FIND $F_DIR_3 \( -type d -and ! -perm u=rwx,g=rx,o=rx \) -exec $CHMOD u=rwx,g=rx,o=rx {} \;
-  $FIND $F_DIR_3 \( -type d -and ! \( -perm u=rwx,g=rx,o=rx -or -perm u=rwx,g=rxs,o=rx \) \) -exec $CHMOD u=rwx,g=rx,o=rx {} \;
-  $FIND $F_DIR_3 \( -type f -and ! -perm u=rw,g=r,o=r \) -exec $CHMOD u=rw,g=r,o=r {} \;
+  $FIND $F_DIR_3 \( -type d -and ! -perm u=rwx,g=rwxs,o= \) -exec $CHMOD u=rwx,g=rwxs,o= {} \;
+  $FIND $F_DIR_3 \( -type f -and ! -perm u=rw,g=rw,o= \) -exec $CHMOD u=rw,g=rw,o= {} \;
 fi
 
 #Permisos Setings 440
