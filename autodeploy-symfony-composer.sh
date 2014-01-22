@@ -77,6 +77,8 @@ php app/console statics:generator --env=prod
 
 cd $C_DIR
 
+. $LIB/symfony-fix-perms.sh $DST_DIR
+
 # Reload apache
 restartServerIfNecesary
 
