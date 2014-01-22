@@ -25,6 +25,7 @@ RM=$(which rm)
 DATE=$(which date)
 SED=$(which sed)
 CAT=$(which cat)
+CAT=$(which awk)
 
 COMPOSER=$(which composer)
 
@@ -62,6 +63,16 @@ echo -e "$($DATE '+%Y-%m-%d %H:%M %Z')\t$DEP_BRANCH\t$REPO_DATE\t$REPO_HASH\t$DE
 $RM -r $DST_DIR
 $MV $TMP_DIR $DST_DIR
 
+ENDING=$(echo ${SITE_NAME} | ${AWK} -F. '{print $NF}')
+case ${ENDING} in
+  staging | devel | demo1 | demo2 )
+    S_ENVIRONMENT="${ENDING}"
+    ;;
+  * )
+    S_ENVIRONMENT='prod'
+    ;;
+esac
+
 C_DIR=$(pwd)
 cd $DST_DIR
 # ensure composer is installed
@@ -74,7 +85,7 @@ ${COMPOSER} update
 
 umask 002
 php app/console assets:install web
-php app/console statics:generator --env=prod
+php app/console statics:generator --env=${S_ENVIRONMENT}
 
 cd $C_DIR
 
@@ -88,7 +99,7 @@ if [ -e symfony ]; then
   php symfony cc
   php symfony doctrine:migrate
 elif [ -e app/console ]; then
-  php app/console cache:clear --env=prod
+  php app/console cache:clear --env=${S_ENVIRONMENT}
   #php app/console doctrine:migrate
 fi
 popd
