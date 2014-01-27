@@ -25,7 +25,7 @@ RM=$(which rm)
 DATE=$(which date)
 SED=$(which sed)
 CAT=$(which cat)
-CAT=$(which awk)
+AWK=$(which awk)
 
 COMPOSER=$(which composer)
 
