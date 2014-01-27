@@ -57,7 +57,7 @@ case ${FRAMEWORK_VERSION} in
   2 )
     F_DIR_1="$DIR/web/uploads"
     F_DIR_2="$DIR/app/cache"
-    F_DIR_3="$DIR/app/log"
+    F_DIR_3="$DIR/app/logs"
     A_SET="$DIR/app/config/databases.yml"
     A_SET_2="$DIR/app/config/ProjectConfiguration.class.php"
     A_SET_3="$DIR/app/config/parameters.yml"
