@@ -11,29 +11,28 @@ REPO_SHORT=$(echo $REPO_BARE | awk 'BEGIN {FS="/" } ; { print $NF }' | sed 's/\.
 ECHO_PREFIX='***'
 
 OWNER=$(git config hooks.deployOwner)
-#defaults 
-: ${OWNER:="root"}
 WWW_US=$(git config hooks.deployWuser)
-: ${WWW_US:="www-data"}
 WWW_GR=$(git config hooks.deployWgroup)
-: ${WWW_GR:="www-data"}
 WEB_ROOT=$(git config hooks.deployRoot)
-: ${WEB_ROOT:="/var/www"}
 SUBDIR=$(git config hooks.deploySubdir)
-
 CONF_OVERWRITE=$(git config hooks.deployConfOverwrite)
-
 FRAMEWORK_VERSION=$(git config hooks.deployFrameworkVersion)
-
 RELOAD_SERVER=$(git config hooks.deployReloadServer)
-: ${RELOAD_SERVER:='false'}
 RELOAD_CMD=$(git config hooks.deployReloadCMD)
+CLEAN_VARNISH=$(git config hooks.deployCleanVarnish)
+VARNISH_ADM_OPTS=$(git config hooks.deployVarnishiAdmOpts)
+
+#defaults
+: ${OWNER:="root"}
+: ${WWW_US:="www-data"}
+: ${WWW_GR:="www-data"}
+: ${WEB_ROOT:="/var/www"}
+
+: ${RELOAD_SERVER:='false'}
 : ${RELOAD_CMD:='/usr/sbin/apache2ctl graceful'}
 
-CLEAN_VARNISH=$(git config hooks.deployCleanVarnish)
 : ${CLEAN_VARNISH:='false'}
 
-VARNISH_ADM_OPTS=$(git config hooks.deployVarnishiAdmOpts)
 : ${VARNISH_ADM_OPTS:='-T :6082 -S /etc/varnish/secret'}
 
 SITE_NAME=${DEP_NAME}
