@@ -10,17 +10,19 @@ REPO_SHORT=$(echo $REPO_BARE | awk 'BEGIN {FS="/" } ; { print $NF }' | sed 's/\.
 
 ECHO_PREFIX='***'
 
-OWNER=$(git config hooks.deployOwner)
-WWW_US=$(git config hooks.deployWuser)
-WWW_GR=$(git config hooks.deployWgroup)
-WEB_ROOT=$(git config hooks.deployRoot)
-SUBDIR=$(git config hooks.deploySubdir)
-CONF_OVERWRITE=$(git config hooks.deployConfOverwrite)
-FRAMEWORK_VERSION=$(git config hooks.deployFrameworkVersion)
-RELOAD_SERVER=$(git config hooks.deployReloadServer)
-RELOAD_CMD=$(git config hooks.deployReloadCMD)
-CLEAN_VARNISH=$(git config hooks.deployCleanVarnish)
-VARNISH_ADM_OPTS=$(git config hooks.deployVarnishiAdmOpts)
+if [ "${SKIP_GIT}" != 'true' ]; then
+  OWNER=$(git config hooks.deployOwner)
+  WWW_US=$(git config hooks.deployWuser)
+  WWW_GR=$(git config hooks.deployWgroup)
+  WEB_ROOT=$(git config hooks.deployRoot)
+  SUBDIR=$(git config hooks.deploySubdir)
+  CONF_OVERWRITE=$(git config hooks.deployConfOverwrite)
+  FRAMEWORK_VERSION=$(git config hooks.deployFrameworkVersion)
+  RELOAD_SERVER=$(git config hooks.deployReloadServer)
+  RELOAD_CMD=$(git config hooks.deployReloadCMD)
+  CLEAN_VARNISH=$(git config hooks.deployCleanVarnish)
+  VARNISH_ADM_OPTS=$(git config hooks.deployVarnishiAdmOpts)
+fi
 
 #defaults
 : ${OWNER:="root"}
