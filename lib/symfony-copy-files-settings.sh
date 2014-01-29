@@ -63,8 +63,11 @@ case ${FRAMEWORK_VERSION} in
     LOG_T_DIR="${TARGET}/app/log"
     CACHE_S_DIR="${SOURCE}/app/cache"
     CACHE_T_DIR="${TARGET}/app/cache"
-    UPLOADS_S_DIR="${SOURCE}/web/uploads"
-    UPLOADS_T_DIR="${TARGET}/web/uploads"
+#TODO: Fix this in a proper way with a array
+#    UPLOADS_S_DIR="${SOURCE}/web/uploads"
+#    UPLOADS_T_DIR="${TARGET}/web/uploads"
+    UPLOADS_S_DIR="${SOURCE}/web/statics"
+    UPLOADS_T_DIR="${TARGET}/web/statics"
     ;;
   * )
     echo "!!! ERROR: unsupported Framework version '${FRAMEWORK_VERSION}'"

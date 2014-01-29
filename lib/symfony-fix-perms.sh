@@ -55,7 +55,9 @@ case ${FRAMEWORK_VERSION} in
     A_SET_3="$DIR/config/parameters.yml"
     ;;
   2 )
-    F_DIR_1="$DIR/web/uploads"
+#TODO: Fix this in a proper way with a array
+#    F_DIR_1="$DIR/web/uploads"
+    F_DIR_1="$DIR/web/statics"
     F_DIR_2="$DIR/app/cache"
     F_DIR_3="$DIR/app/logs"
     A_SET="$DIR/app/config/databases.yml"
