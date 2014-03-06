@@ -30,7 +30,7 @@ MAKEFILE_NAME=$4
 
 # Clonar RAMA REPO con submoduless en dir tmp
 # clone-with-subs.sh $REPO $BRANCH $TARGET
-. $LIB/clone-with-subs.sh $REPO_BARE $DEP_BRANCH $TMP_DIR
+. $LIB/clone-with-subs.sh $REPO_BARE $DEP_BRANCH $TMP_DIR $TAG
 
 # Build 1
 BUILD_DIR="$TMP_DIR/tmp"
