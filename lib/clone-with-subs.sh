@@ -17,9 +17,9 @@ E_TARGET_EXISTS=67
 EXPECTED_ARGS=3
 
 #echo $0
-if [ $# -ne $EXPECTED_ARGS ]
+if [ $# -lt $EXPECTED_ARGS ]
 then
-  echo " This script expect $EXPECTED_ARGS arguments instead of $#"
+  echo " This script expect at least $EXPECTED_ARGS arguments instead of $#"
   exit $E_BADARGS
 fi
 
@@ -55,6 +55,7 @@ fi
 REPO=$1
 BRANCH=$2
 TARGET=$3
+TAG=$4
 echo "*** Obtaining a working copy of $REPO's $BRANCH branch over $TARGET"
 
 if [ -e $TARGET ]; then
@@ -75,6 +76,10 @@ cd $REPO_TMP
 $GIT clone $REPO
 cd $REPO_SHORT
 $GIT checkout $BRANCH
+if [ "${TAG}" != "" ]; then
+  git tag -f ${TAG}
+  git push origin ${TAG}
+fi
 REPO_HASH=$($GIT rev-parse $BRANCH)
 REPO_DATE=$($GIT log $BRANCH -1 --format="%aD")
 if [ -e ".gitmodules" ]; then

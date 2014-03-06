@@ -22,6 +22,8 @@ if [ "${SKIP_GIT}" != 'true' ]; then
   RELOAD_CMD=$(git config hooks.deployReloadCMD)
   CLEAN_VARNISH=$(git config hooks.deployCleanVarnish)
   VARNISH_ADM_OPTS=$(git config hooks.deployVarnishiAdmOpts)
+  TAG_DEPLOYS=$(git config hooks.deployTagDeploys)
+  TAG=$(git config hooks.deployTag)
 fi
 
 #defaults
@@ -36,6 +38,14 @@ fi
 : ${CLEAN_VARNISH:='false'}
 
 : ${VARNISH_ADM_OPTS:='-T :6082 -S /etc/varnish/secret'}
+
+: ${TAG_DEPLOYS:='false'}
+
+if [ "${TAG_DEPLOYS}" = 'true' ]; then
+  : ${TAG:=${DEP_NAME}}
+else
+  TAG=''
+fi
 
 SITE_NAME=${DEP_NAME}
 LOG_FILE="${REAL_PATH}/log/${SITE_NAME}_autodeploy.log"
