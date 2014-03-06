@@ -42,7 +42,7 @@ fi
 : ${TAG_DEPLOYS:='false'}
 
 if [ "${TAG_DEPLOYS}" = 'true' ]; then
-  : ${TAG:=${DEP_NAME}}
+  : ${TAG:="deploy-${DEP_NAME}"}
 else
   TAG=''
 fi
