@@ -71,15 +71,16 @@ ARCH_TMP="/tmp/$REPO_SHORT-$$-tar"
 
 pushd $(pwd)
 
+if [ "${TAG}" != "" ]; then
+  cd $REPO
+  sudo -u $(stat -c %U .) -g $(stat -c %G .) git tag -f ${TAG} $BRANCH
+fi
+
 mkdir -p $REPO_TMP
 cd $REPO_TMP
 $GIT clone $REPO
 cd $REPO_SHORT
 $GIT checkout $BRANCH
-if [ "${TAG}" != "" ]; then
-  git tag -f ${TAG}
-  git push origin ${TAG}
-fi
 REPO_HASH=$($GIT rev-parse $BRANCH)
 REPO_DATE=$($GIT log $BRANCH -1 --format="%aD")
 if [ -e ".gitmodules" ]; then
