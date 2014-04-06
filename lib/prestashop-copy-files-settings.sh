@@ -43,9 +43,11 @@ fi
 DIRS=(img tools/smarty/cache tools/smarty/compile tools/smarty_v2/cache tools/smarty_v2/compile)
 for DIR in "${DIRS[@]}"
 do
-  if [ ! -d $TARGET/$DIR ]
+  if [ ! -d $SOURCE/$DIR ]
   then
     $MKDIR $TARGET/$DIR
+  else
+    $CP $SOURCE/$DIR $TARGET/$DIR
   fi
 done
 
