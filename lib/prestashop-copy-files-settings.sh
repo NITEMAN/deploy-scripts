@@ -47,7 +47,7 @@ do
   then
     $MKDIR $TARGET/$DIR
   else
-    $CP $SOURCE/$DIR $TARGET/$DIR
+    $CP -ar $SOURCE/$DIR $TARGET/$DIR
   fi
 done
 
