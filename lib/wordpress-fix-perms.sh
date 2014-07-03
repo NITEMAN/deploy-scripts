@@ -92,4 +92,3 @@ if [ -e $W3TC_FILE ]; then
   $CHMOD 660 $W3TC_FILE
 fi
 
-exit 0

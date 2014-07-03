@@ -65,4 +65,3 @@ if [ -d "$SOURCE/wp-content/plugins/bwp-google-xml-sitemaps/cache" ]; then
   $CP -a $SOURCE/wp-content/plugins/bwp-google-xml-sitemaps/cache/*.* $TARGET/wp-content/plugins/bwp-google-xml-sitemaps/cache/
 fi
 
-exit 0
