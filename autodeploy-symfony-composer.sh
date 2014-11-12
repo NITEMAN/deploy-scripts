@@ -81,7 +81,7 @@ if [ "${COMPOSER}" = "" ]; then
   COMPOSER="php composer.phar"
 fi
 ${COMPOSER} self-update
-${COMPOSER} update
+${COMPOSER} update --optimize-autoloader
 
 umask 002
 php app/console assets:install web
