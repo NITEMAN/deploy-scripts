@@ -41,6 +41,9 @@ fi
 
 : ${TAG_DEPLOYS:='false'}
 
+#expect something in the form of '/htdocs'
+: ${BOLIERPLATE_DIR:=''}
+
 if [ "${TAG_DEPLOYS}" = 'true' ]; then
   : ${TAG:="deploy-${DEP_NAME}"}
 else
