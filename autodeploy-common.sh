@@ -41,8 +41,12 @@ fi
 
 : ${TAG_DEPLOYS:='false'}
 
-#expect something in the form of '/htdocs'
-: ${BOLIERPLATE_DIR:=''}
+#expects a subdir of the repository.
+: ${APP_SUBDIR:=''}
+
+if [ "${APP_SUBDIR}" != "" ]; then
+  APP_SUBDIR="/${APP_SUBDIR}"
+fi
 
 if [ "${TAG_DEPLOYS}" = 'true' ]; then
   : ${TAG:="deploy-${DEP_NAME}"}
