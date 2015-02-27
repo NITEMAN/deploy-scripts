@@ -78,7 +78,9 @@ COLUMNS=72 $DRUSH cache-clear drush
 COLUMNS=72 $DRUSH -r $DST_DIR -l $SITE_NAME features-revert-all -y
 
 # Borrar caches
-COLUMNS=72 $DRUSH -r $DST_DIR -l $SITE_NAME cc all
+if [ "$CC" != 'false' ]; then
+  COLUMNS=72 $DRUSH -r $DST_DIR -l $SITE_NAME cc all
+fi
 
 # Clean Varnish
 cleanVarnishIfNecesary
