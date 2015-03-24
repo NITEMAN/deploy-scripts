@@ -44,6 +44,31 @@ DEP_USER=$3
 # copy-files-settings.sh $SOURCE $TARGET
 . $LIB/symfony-copy-files-settings.sh $DST_DIR $TMP_DIR
 
+C_DIR=$(pwd)
+cd $TMP_DIR
+# ensure composer is installed
+if [ "${COMPOSER}" = "" ]; then
+  curl -sS https://getcomposer.org/installer | php
+  COMPOSER="php composer.phar"
+fi
+${COMPOSER} self-update
+${COMPOSER} update --optimize-autoloader
+
+umask 002
+php app/console assets:install web
+ENDING=$(echo ${SITE_NAME} | ${AWK} -F. '{print $NF}')
+case ${ENDING} in
+  staging | devel | demo1 | demo2 )
+    S_ENVIRONMENT="${ENDING}"
+    php app/console statics:generator --env=${S_ENVIRONMENT}
+    ;;
+  * )
+    S_ENVIRONMENT='prod'
+    ;;
+esac
+
+cd $C_DIR
+
 # Arreglar permisos
 # fix-drupal-perms.sh $TARGET
 . $LIB/symfony-fix-perms.sh $TMP_DIR
@@ -62,32 +87,6 @@ echo -e "$($DATE '+%Y-%m-%d %H:%M %Z')\t$DEP_BRANCH\t$REPO_DATE\t$REPO_HASH\t$DE
 
 $RM -r $DST_DIR
 $MV $TMP_DIR $DST_DIR
-
-ENDING=$(echo ${SITE_NAME} | ${AWK} -F. '{print $NF}')
-case ${ENDING} in
-  staging | devel | demo1 | demo2 )
-    S_ENVIRONMENT="${ENDING}"
-    ;;
-  * )
-    S_ENVIRONMENT='prod'
-    ;;
-esac
-
-C_DIR=$(pwd)
-cd $DST_DIR
-# ensure composer is installed
-if [ "${COMPOSER}" = "" ]; then
-  curl -sS https://getcomposer.org/installer | php
-  COMPOSER="php composer.phar"
-fi
-${COMPOSER} self-update
-${COMPOSER} update --optimize-autoloader
-
-umask 002
-php app/console assets:install web
-php app/console statics:generator --env=${S_ENVIRONMENT}
-
-cd $C_DIR
 
 # Reload apache
 restartServerIfNecesary

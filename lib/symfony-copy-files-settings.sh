@@ -61,12 +61,12 @@ case ${FRAMEWORK_VERSION} in
     CONFIG_T_DIR="${TARGET}/app/config"
     LOG_S_DIR="${SOURCE}/app/log"
     LOG_T_DIR="${TARGET}/app/log"
-    CACHE_S_DIR="${SOURCE}/app/cache"
+#    CACHE_S_DIR="${SOURCE}/app/cache"
     CACHE_T_DIR="${TARGET}/app/cache"
 #TODO: Fix this in a proper way with a array
 #    UPLOADS_S_DIR="${SOURCE}/web/uploads"
 #    UPLOADS_T_DIR="${TARGET}/web/uploads"
-    UPLOADS_S_DIR="${SOURCE}/web/statics"
+#    UPLOADS_S_DIR="${SOURCE}/web/statics"
     UPLOADS_T_DIR="${TARGET}/web/statics"
     ;;
   * )
