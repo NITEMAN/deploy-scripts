@@ -84,7 +84,7 @@ $GIT checkout $BRANCH
 REPO_HASH=$($GIT rev-parse $BRANCH)
 REPO_DATE=$($GIT log $BRANCH -1 --format="%aD")
 if [ -e ".gitmodules" ]; then
-  $GIT submodule update --init
+  $GIT submodule update --init --recursive
   $LIB/git-archive-all.sh $ARCH_TMP
 else
   $GIT archive --format=tar $BRANCH -o $ARCH_TMP
