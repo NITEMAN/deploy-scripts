@@ -71,7 +71,9 @@ cd $C_DIR
 
 # Arreglar permisos
 # fix-drupal-perms.sh $TARGET
-. $LIB/symfony-fix-perms.sh $TMP_DIR
+if [ "${FIX_PERMS}" = 'true' ]; then
+  . $LIB/symfony-fix-perms.sh $TMP_DIR
+fi
 
 # Firmar Robots
 REPO_HASH=$($CAT $TMP_DIR/.git_hash)

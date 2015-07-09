@@ -45,7 +45,9 @@ COLUMNS=72 $DRUSH make $TMP_DIR/$MAKEFILE_NAME $BUILD_DIR
 
 # Arreglar permisos
 # fix-drupal-perms.sh $TARGET
-. $LIB/drupal-fix-perms.sh $BUILD_DIR
+if [ "${FIX_PERMS}" = 'true' ]; then
+  . $LIB/drupal-fix-perms.sh $BUILD_DIR
+fi
 
 # Firmar Robots
 REPO_HASH=$($CAT $TMP_DIR/.git_hash)

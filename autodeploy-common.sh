@@ -24,6 +24,7 @@ if [ "${SKIP_GIT}" != 'true' ]; then
   VARNISH_ADM_OPTS=$(git config hooks.deployVarnishiAdmOpts)
   TAG_DEPLOYS=$(git config hooks.deployTagDeploys)
   TAG=$(git config hooks.deployTag)
+  FIX_PERMS=$(git config hooks.deployFixPerms)
 fi
 
 #defaults
@@ -40,6 +41,8 @@ fi
 : ${VARNISH_ADM_OPTS:='-T :6082 -S /etc/varnish/secret'}
 
 : ${TAG_DEPLOYS:='false'}
+
+: ${FIX_PERMS:='true'}
 
 #expects a subdir of the repository.
 : ${APP_SUBDIR:=''}

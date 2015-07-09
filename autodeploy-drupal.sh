@@ -37,7 +37,9 @@ DEP_USER=$3
 
 # Arreglar permisos
 # fix-drupal-perms.sh $TARGET
-. $LIB/drupal-fix-perms.sh $TMP_DIR${APP_SUBDIR}
+if [ "${FIX_PERMS}" = 'true' ]; then
+  . $LIB/drupal-fix-perms.sh $TMP_DIR${APP_SUBDIR}
+fi
 
 # Firmar Robots
 REPO_HASH=$($CAT $TMP_DIR/.git_hash)
