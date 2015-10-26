@@ -33,7 +33,7 @@ DEP_USER=$3
 
 # Copiar files y settings
 # copy-files-settings.sh $SOURCE $TARGET
-. $LIB/drupal-copy-files-settings.sh $DST_DIR $TMP_DIR${APP_SUBDIR}
+. $LIB/drupal-copy-files-settings.sh $DST_DIR${APP_SUBDIR} $TMP_DIR${APP_SUBDIR}
 
 # Arreglar permisos
 # fix-drupal-perms.sh $TARGET
@@ -58,14 +58,14 @@ fi
 echo -e "$($DATE '+%Y-%m-%d %H:%M %Z')\t$DEP_BRANCH\t$REPO_DATE\t$REPO_HASH\t$DEP_USER" >> $LOG_FILE
 
 $RM -r $DST_DIR
-$MV $TMP_DIR${APP_SUBDIR} $DST_DIR
+$MV $TMP_DIR $DST_DIR
 
 # Reload apache
 restartServerIfNecesary
 
 # Borrar caches
 if [ "$CC" != 'false' ]; then
-  COLUMNS=72 $DRUSH -r $DST_DIR -l $SITE_NAME cc all
+  COLUMNS=72 $DRUSH -r $DST_DIR${APP_SUBDIR} -l $SITE_NAME cc all
 fi
 
 # Clean Varnish
