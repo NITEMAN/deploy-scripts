@@ -93,7 +93,7 @@ cd ~
 rm -fr $REPO_TMP
 
 $MKDIR -p $TARGET
-$CHOWN :$WWW_GR $TARGET
+$CHOWN $OWNER:$WWW_GR $TARGET
 $CHMOD g+s,o= $TARGET
 cd $TARGET
 umask 027 && $TAR -xf $ARCH_TMP --no-same-owner --no-same-permissions
