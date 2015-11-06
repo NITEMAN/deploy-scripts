@@ -84,19 +84,3 @@ for drup_site in $S_DIR/*; do
   fi
 done
 
-# For each directory except "all" inside $TARGET's sites
-for drup_site in $T_DIR/*; do
-  if [ -d $drup_site ]; then
-    if [ ! $drup_site = "$T_DIR/all" ]; then
-      # Ensure that files directory exists 
-      if [ ! -d "$drup_site/files" ]; then 
-        $MKDIR $drup_site/files 
-      fi
-      # Ensure that private directory exists 
-      if [ ! -d "$drup_site/private" ]; then 
-        $MKDIR $drup_site/private 
-      fi
-    fi
-  fi
-done
-
